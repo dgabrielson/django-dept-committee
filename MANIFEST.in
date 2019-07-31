@@ -1,0 +1,5 @@
+include requirements.txt
+#include LICENSE.txt
+include README
+#recursive-include committee/static *
+recursive-include committee/templates *

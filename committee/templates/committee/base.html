@@ -1,0 +1,34 @@
+{% extends 'site_base.html' %}
+
+{# ########################################### #}
+
+{% block page_title %}{{ block.super }}{% block head_subtitle %}Committees{% endblock %}{% endblock %}
+{% block page_content_header %}{% block title %}Committees{% endblock %}{% endblock %}
+
+{# ########################################### #}
+
+{% block page_content_body %}
+    <section>
+        {% block committee_content %}
+            <p>
+                Committee Content.
+            </p>
+        {% endblock committee_content %}
+    </section>
+    {% block committee_extra_content %}
+    {% endblock committee_extra_content %}
+{% endblock page_content_body %}
+
+{# ########################################### #}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% block app_breadcrumbs %}
+        <span class="divider">&gt;</span>
+        {% include './includes/app_breadcrumbs.html' %}
+        {% block page_breadcrumbs %}
+        {% endblock %}
+    {% endblock app_breadcrumbs %}
+{% endblock %}
+
+{# ########################################### #}

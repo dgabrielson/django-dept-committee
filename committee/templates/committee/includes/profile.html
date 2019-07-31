@@ -1,0 +1,37 @@
+{# ########################################################## #}
+{# This template fragment expects to be have a `third_person` #}
+{# variable as a part of the context.                         #}
+{# This variable indicates whether it is *this* person        #}
+{# or a different person looking at the information           #}
+{# It is assumed that only people with the change_person      #}
+{# permission will be looking at other people's information.  #}
+{# ########################################################## #}
+
+{% load humanize %}
+
+
+
+{% if person.member_set.active.current %}
+    <h3>Committees</h3>
+
+    <ul>
+        {% for m in person.member_set.active.current %}
+            <li>
+                {% url 'committee-detail' slug=m.committee.slug as link_url %}
+                {% if link_url %}
+                    <a href="{{ link_url }}">
+                        {{ m.committee }}
+                    </a>
+                {% else %}
+                    {{ m.committee }}
+                {% endif %}
+                {% if m.chair %}
+                    (chair)
+                {% endif %}
+                {% if m.end_date %}
+                    &mdash; term ends in {{ m.end_date|timeuntil }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

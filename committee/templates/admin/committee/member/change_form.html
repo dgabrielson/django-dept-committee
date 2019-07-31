@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+{% load static i18n admin_urls %}
+
+{% block object-tools-items %}
+    {% url 'admin:committee_committee_change' original.committee_id as link_url %}
+    {% if link_url %}
+        <li><a href="{{ link_url }}" class="viewsitelink">
+            Committee Record</a>
+        </li>
+    {% endif %}
+    {% url 'admin:people_person_change' original.person_id as link_url %}
+    {% if link_url and perms.people.change_person %}
+        <li><a href="{{ link_url }}" class="viewsitelink">
+            Person Record</a>
+        </li>
+    {% endif %}
+{{ block.super }}
+{% endblock %}

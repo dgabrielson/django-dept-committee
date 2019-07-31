@@ -1,0 +1,5 @@
+#django-autoslug
+dcg-autoslug
+
+django-dept-directory
+django-markuphelpers

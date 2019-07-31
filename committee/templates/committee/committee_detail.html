@@ -1,0 +1,119 @@
+{% extends 'committee/committee_list.html' %}
+{% load markup %}
+
+{# ########################################### #}
+
+{% block head_subtitle %}{{ object }}{% endblock %}
+{% block title %}{{ object }}{% endblock %}
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+    {{ block.super }}
+    <span class="divider">&gt;</span>
+    {% with url=object.get_absolute_url %}
+        {% if url != request.path %}
+            <a href="{{ url }}">{{ object }}</a>
+        {% else %}
+            {{ object }}
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{# ########################################### #}
+
+{% block committee_content %}
+    <dl>
+        {% if object.membership %}
+
+                <dt><strong>
+                    Membership
+                </strong></dt>
+                <dd>
+                    {{ object.membership|restructuredtext }}
+                </dd>
+
+        {% endif %}
+        {% if object.means_of_selection %}
+
+                <dt><strong>
+                    Means of Selection
+                </strong></dt>
+                <dd>
+                    {{ object.means_of_selection|restructuredtext }}
+                </dd>
+
+        {% endif %}
+        {% if object.term %}
+
+                <dt><strong>
+                    Term
+                </strong></dt>
+                <dd>
+                    <p>{{ object.term }}</p>
+                </dd>
+
+        {% endif %}
+        {% if object.quorum %}
+
+                <dt><strong>
+                    Quorum
+                </strong></dt>
+                <dd>
+                    <p>{{ object.quorum }}</p>
+                </dd>
+
+        {% endif %}
+        {% if object.terms_of_reference %}
+
+                <dt><strong>
+                    Terms of Reference
+                </strong></dt>
+                <dd>
+                    {{ object.terms_of_reference|restructuredtext }}
+                </dd>
+
+        {% endif %}
+        {% if object.remarks %}
+
+                <dt><strong>
+                    Remarks
+                </strong></dt>
+                <dd>
+                    {{ object.remarks|restructuredtext }}
+                </dd>
+
+        {% endif %}
+        {% if object.member_set.active.current %}
+            <dt><strong>
+                Members
+            </strong></dt>
+            <dd>
+                {% for m in object.member_set.active.current %}
+                    <p>
+                        {% if m.get_absolute_url %}
+                            <a href="{{ m.get_absolute_url }}">
+                                {{ m }}
+                            </a>
+                        {% else %}
+                            {{ m }}
+                        {% endif %}
+                        {% if m.chair %}
+                            (chair)
+                        {% endif %}
+                        {% if m.end_date %}
+                            &mdash; term ends in {{ m.end_date|timeuntil }}
+                        {% endif %}
+                    </p>
+                {% endfor %}
+            </dd>
+        {% endif %}
+    </dl>
+{% endblock %}
+
+{# ########################################### #}
+
+{% block committee_extra_content %}
+{% endblock %}
+
+{# ########################################### #}

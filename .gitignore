@@ -1,0 +1,11 @@
+venv
+committee_demo_site/demo.db
+committee_demo_site/media
+build
+dist
+
+
+*.egg-info
+*.pyc
+*~
+.DS_Store
